@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+        }
+        section {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            overflow: auto;
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>User Account Management</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">User Management</a></li>
+        <li><a href="#">Course Management</a></li>
+        <li><a href="#">Academic Management</a></li>
+        <li><a href="#">Financial Management</a></li>
+        <li><a href="#">Communication Tools</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Logout</a></li>
+    </ul>
+</nav>
+
+<section>
+    <h2>User Account Overview</h2>
+    <div>
+        <input type="text" id="userSearch" placeholder="Search by Name, Email, or User ID">
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>ADMIN</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Registration Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Dhruv galgotias</td>
+                <td>dhruvgalgotias@gmail.com</td>
+                <td>Admin</td>
+                <td>Active</td>
+                <td>01/01/2014</td>
+                <td>
+                    <button onclick="viewProfile()">View</button>
+                    <button onclick="editUser()">Edit</button>
+                    <button onclick="toggleUserStatus(1)">Deactivate</button>
+                </td>
+            </tr>
+            <!-- Add more users as needed -->
+        </tbody>
+    </table>
+
+    <button onclick="openRegistrationForm()">Add New User</button>
+</section>
+
+<!-- User Registration Form Modal -->
+<div id="registrationModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closeModal()" style="cursor: pointer;">&times;</span>
+        <h2>Register New User</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role">
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="staff">Staff</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone">
+            </div>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="closeModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<!-- Password Reset Modal -->
+<div id="passwordResetModal" class="modal">
+    <div class="modal-content">
+        <span onclick="closePasswordResetModal()" style="cursor: pointer;">&times;</span>
+        <h2>Reset Password</h2>
+        <form>
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" required>
+            </div>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="closePasswordResetModal()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Modal functionality
+    function openRegistrationForm() {
+        document.getElementById("registrationModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("registrationModal").style.display = "none";
+    }
+
+    function openPasswordResetModal() {
+        document.getElementById("passwordResetModal").style.display = "block";
+    }
+
+    function closePasswordResetModal() {
+        document.getElementById("passwordResetModal").style.display = "none";
+    }
+
+    // Toggle User Status
+    function toggleUserStatus(userId) {
+        let statusButton = event.target;
+        if (statusButton.innerText === "Deactivate") {
+            statusButton.innerText = "Activate";
+        } else {
+            statusButton.innerText = "Deactivate";
+        }
+    }
+
+    // View Profile (dummy function)
+    function viewProfile() {
+        alert('Viewing Profile');
+    }
+
+    // Edit User (dummy function)
+    function editUser() {
+        alert('Editing User');
+    }
+</script>
+
+</body>
+</html>

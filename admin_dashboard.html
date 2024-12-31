@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .dashboard-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .dashboard-container h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .option-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .option-card {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .option-card:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        .option-card i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .option-card h4 {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome to Admin Dashboard</h2>
+
+        <div class="option-buttons">
+            <div class="option-card" onclick="window.location.href='user_management.html'">
+                <i class="fas fa-users"></i>
+                <h4>User Management</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='course_management.html'">
+                <i class="fas fa-book"></i>
+                <h4>Course Management</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='academic_management.html'">
+                <i class="fas fa-graduation-cap"></i>
+                <h4>Academic Management</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='financial_management.html'">
+                <i class="fas fa-credit-card"></i>
+                <h4>Financial Management</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='communication_tools.html'">
+                <i class="fas fa-comment"></i>
+                <h4>Communication Tools</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='reporting_and_analysis.html'">
+                <i class="fas fa-chart-line"></i>
+                <h4>Reporting and Analysis</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='compliance_and_accreditation.html'">
+                <i class="fas fa-check-circle"></i>
+                <h4>Compliance and Accreditation</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='system_management.html'">
+                <i class="fas fa-cogs"></i>
+                <h4>System Management</h4>
+            </div>
+            <div class="option-card" onclick="window.location.href='support_and_helpdesk.html'">
+                <i class="fas fa-life-ring"></i>
+                <h4>Support and Helpdesk</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
