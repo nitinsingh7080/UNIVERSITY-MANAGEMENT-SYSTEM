@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        .report-form,
+        .report-summary {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .report-form h3,
+        .report-summary h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .report-form select,
+        .report-form input,
+        .report-form button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .report-form button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .report-form button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #343a40;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .footer a {
+            color: #ff5722;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Generate Reports</h1>
+    </header>
+
+    <div class="container">
+        <!-- Report Generation Form -->
+        <div class="report-form">
+            <h3>Select Report Parameters</h3>
+            <form id="reportForm">
+                <select id="reportType" required>
+                    <option value="">Select Report Type</option>
+                    <option value="expense">Expense Report</option>
+                    <option value="sales">Sales Report</option>
+                    <option value="marketing">Marketing Report</option>
+                </select>
+
+                <input type="date" id="startDate" required />
+                <input type="date" id="endDate" required />
+
+                <button type="submit">Generate Report</button>
+            </form>
+        </div>
+
+        <!-- Report Summary -->
+        <div class="report-summary">
+            <h3>Generated Report</h3>
+            <p id="reportMessage">No report generated yet.</p>
+
+            <table id="reportTable" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Report Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="reportTypeData"></td>
+                        <td id="startDateData"></td>
+                        <td id="endDateData"></td>
+                        <td id="reportData"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button id="downloadBtn" style="display:none;">Download as CSV</button>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Your Company Name | <a href="mailto:support@yourcompany.com">Contact Support</a></p>
+    </div>
+
+    <script>
+        // Function to generate the report based on selected parameters
+        const reportForm = document.getElementById('reportForm');
+        const reportTable = document.getElementById('reportTable');
+        const reportMessage = document.getElementById('reportMessage');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Handle report form submission
+        reportForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const reportType = document.getElementById('reportType').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            if (reportType && startDate && endDate) {
+                // Simulate report data
+                const reportData = generateReportData(reportType, startDate, endDate);
+
+                // Update the UI
+                document.getElementById('reportTypeData').textContent = reportType.charAt(0).toUpperCase() + reportType.slice(1);
+                document.getElementById('startDateData').textContent = startDate;
+                document.getElementById('endDateData').textContent = endDate;
+                document.getElementById('reportData').textContent = reportData;
+
+                reportMessage.style.display = 'none';
+                reportTable.style.display = 'table';
+                downloadBtn.style.display = 'inline-block';
+            }
+        });
+
+        // Simulated report data generation (replace with real data fetching)
+        function generateReportData(reportType, startDate, endDate) {
+            // Placeholder for dynamic report data generation
+            return `Generated data for ${reportType} from ${startDate} to ${endDate}`;
+        }
+
+        // Function to download the report as CSV
+        downloadBtn.addEventListener('click', function () {
+            const reportType = document.getElementById('reportTypeData').textContent;
+            const startDate = document.getElementById('startDateData').textContent;
+            const endDate = document.getElementById('endDateData').textContent;
+            const reportData = document.getElementById('reportData').textContent;
+
+            const csvContent = `Report Type,Start Date,End Date,Data\n${reportType},${startDate},${endDate},${reportData}`;
+
+            // Create a hidden link to download the CSV file
+            const link = document.createElement('a');
+            link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvContent));
+            link.setAttribute('download', 'generated_report.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+
+</body>
+
+</html>

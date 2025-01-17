@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile - DSA Using JAVA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #b84ffe, #00f2fe); /* Modern gradient */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .profile-container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow for a clean look */
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .profile-container img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 2px solid #eee; /* Light border to give structure */
+        }
+
+        .profile-container h2 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #333; /* Darker color for headings */
+        }
+
+        .profile-container p {
+            font-size: 16px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .profile-container h4 {
+            font-weight: normal;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .save-button, .back-button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px;
+        }
+
+        .save-button:hover, .back-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            background-color: #2196F3;
+            margin-top: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #1976D2;
+        }
+
+        /* Responsive design for mobile devices */
+        @media (max-width: 600px) {
+            .profile-container {
+                padding: 15px;
+                width: 90%;
+            }
+
+            .profile-container img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-container h2 {
+                font-size: 20px;
+            }
+
+            .profile-container p {
+                font-size: 14px;
+            }
+
+            .profile-container h4 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img src="DSA Teacher.png" alt="Teacher's Profile Image">
+        <h2>Mr. Sayooj Sir</h2>
+        <p>Qualification: <h4>M.Sc in Computer Science And Engineering</h4></p>
+        <p>Course Name: <h4>DSA Using JAVA</h4></p>
+
+        <!-- Save Profile button -->
+        <button class="save-button" onclick="saveProfile()">Save Profile</button>
+
+        <!-- Back to Courses button -->
+        <button class="back-button" onclick="location.href='dsa.html'">Back to Courses</button>
+    </div>
+
+    <script>
+        function saveProfile() {
+            // For this demo, we are just showing an alert, but it can be expanded to save on a server.
+            alert("Profile Saved:\nName: Mr. Sayooj Sir\nQualification: M.Sc in Computer Science And Engineering\nCourse Name: DSA Using JAVA");
+        }
+    </script>
+</body>
+</html>

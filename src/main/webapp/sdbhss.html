@@ -1,0 +1,145 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center; /* Center the container horizontally */
+    align-items: center; /* Center the container vertically */
+}
+
+/* Main container holding both image and role selection */
+.container {
+    display: flex;
+    width: 100%;
+    height: 80%;
+}
+
+/* Image section on the left */
+.image-container {
+    flex: 1;
+    background-image: url('galgotias.jpeg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dark overlay effect on image */
+.image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Content inside the image container */
+.image-container .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Heading style for content */
+.image-container .content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Paragraph style for content */
+.image-container .content p {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Role container (right side) */
+.role-container {
+    flex: 1;
+    background-color: whitesmoke;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+/* Role selection title */
+.role-container h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Make the logo larger and more centered */
+.role-container img {
+    width: 250px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+/* Role selection buttons as cards */
+.role-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Card style for the role buttons */
+.role-card {
+    background-color: #007bff;
+    color: white;
+    padding: 30px 40px;
+    text-align: center;
+    border-radius: 10px;
+    width: 150px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.role-card:hover {
+    background-color: #0056b3;
+    transform: translateY(-5px);
+}
+
+.role-card i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .image-container, .role-container {
+        width: 100%;
+        height: 50%;
+    }
+
+    .role-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .role-container img {
+        width: 200px;
+    }
+
+    .role-card {
+        padding: 20px 25px;
+        width: 120px;
+    }
+}

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .section-title {
+            margin-top: 40px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .table-container {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btns button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-btns button:hover {
+            background-color: #ff4d3b;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #218838;
+        }
+
+        .category-dropdown {
+            margin-top: 20px;
+        }
+
+        .chart-container {
+            margin-top: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #uploadStatus {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .assigned-instructors-list {
+            margin-top: 20px;
+        }
+
+        .assigned-instructors-list ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .assigned-instructors-list li {
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Course Management</h1>
+
+        <!-- Add New Course Section -->
+        <div class="form-container">
+            <h2 class="section-title">Add New Course</h2>
+            <form id="addCourseForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="courseName">Course Name</label>
+                    <input type="text" id="courseName" name="courseName" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Course Description</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="schedule">Schedule</label>
+                    <input type="text" id="schedule" name="schedule" required>
+                </div>
+                <div class="form-group">
+                    <label for="instructor">Instructor</label>
+                    <input type="text" id="instructor" name="instructor" required>
+                </div>
+                <div class="form-group">
+                    <label for="prerequisites">Prerequisites</label>
+                    <input type="text" id="prerequisites" name="prerequisites">
+                </div>
+                <div class="form-group">
+                    <label for="category">Course Category</label>
+                    <select id="category" name="category">
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Arts">Arts</option>
+                        <option value="Business">Business</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="material">Course Material (Upload Files)</label>
+                    <input type="file" id="material" name="material" multiple>
+                    <span id="uploadStatus"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Add Course</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Course Listing Section -->
+        <div class="table-container">
+            <h2 class="section-title">Course Listing</h2>
+            <table id="courseTable">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Category</th>
+                        <th>Instructor</th>
+                        <th>Description</th>
+                        <th>Schedule</th>
+                        <th>Prerequisites</th>
+                        <th>Course Materials</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamically filled rows -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Instructor Management Section -->
+        <div class="section-title">
+            <h2>Instructor Management</h2>
+            <p>Assign instructors to courses.</p>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="enrollCourse">Select Course</label>
+                    <select id="enrollCourse">
+                        <!-- Dynamically filled options will go here -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="instructorName">Instructor Name</label>
+                    <input type="text" id="instructorName" name="instructorName">
+                </div>
+                <div class="form-group">
+                    <button class="btn" id="assignInstructorBtn">Assign Instructor</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- List of Assigned Instructors -->
+        <div class="assigned-instructors-list">
+            <h2>Assigned Instructors</h2>
+            <ul id="assignedInstructorsList">
+                <!-- Instructor-course assignments will be listed here -->
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        const addCourseForm = document.getElementById('addCourseForm');
+        const courseTable = document.getElementById('courseTable').getElementsByTagName('tbody')[0];
+        const enrollCourse = document.getElementById('enrollCourse');
+        const assignInstructorBtn = document.getElementById('assignInstructorBtn');
+        const assignedInstructorsList = document.getElementById('assignedInstructorsList');
+        const courseOptions = document.getElementById('enrollCourse');
+        const uploadStatus = document.getElementById('uploadStatus');
+
+        let courses = []; // Store courses data
+
+        // Add course form handler
+        addCourseForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const courseName = document.getElementById('courseName').value;
+            const description = document.getElementById('description').value;
+            const schedule = document.getElementById('schedule').value;
+            const instructor = document.getElementById('instructor').value;
+            const prerequisites = document.getElementById('prerequisites').value;
+            const category = document.getElementById('category').value;
+            const material = document.getElementById('material').files;
+
+            // Prepare material data
+            const materialLinks = [];
+            if (material.length > 0) {
+                Array.from(material).forEach(file => {
+                    materialLinks.push(file.name); // Store file names for now
+                });
+            }
+
+            // Add course to courses array
+            const newCourse = { courseName, description, schedule, instructor, prerequisites, category, materials: materialLinks };
+            courses.push(newCourse);
+
+            // Add course to the course table
+            const newRow = courseTable.insertRow();
+            newRow.innerHTML = `
+                <td>${courseName}</td>
+                <td>${category}</td>
+                <td>${instructor}</td>
+                <td>${description}</td>
+                <td>${schedule}</td>
+                <td>${prerequisites}</td>
+                <td>
+                    ${materialLinks.length > 0 ? materialLinks.join(', ') : 'No materials'}
+                </td>
+                <td>
+                    <div class="action-btns">
+                        <button onclick="editCourse(this)">Edit</button>
+                        <button onclick="deleteCourse(this)">Delete</button>
+                    </div>
+                </td>
+            `;
+
+            // Add course to dropdown for instructor assignment
+            const option = document.createElement('option');
+            option.textContent = courseName;
+            option.value = courseName;
+            courseOptions.appendChild(option);
+
+            // Update upload status
+            uploadStatus.textContent = `${materialLinks.length} file(s) uploaded.`;
+
+            addCourseForm.reset();
+        });
+
+        // Assign instructor to the selected course
+        assignInstructorBtn.addEventListener('click', function () {
+            const selectedCourseName = enrollCourse.value;
+            const instructorName = document.getElementById('instructorName').value;
+
+            if (!selectedCourseName || !instructorName) {
+                alert('Please select a course and enter an instructor name.');
+                return;
+            }
+
+            // Find the selected course in the courses array
+            const course = courses.find(course => course.courseName === selectedCourseName);
+            if (course) {
+                course.instructor = instructorName; // Assign the instructor
+            }
+
+            // Update the instructor list display
+            updateAssignedInstructorsList();
+
+            // Optionally, clear the instructor name field
+            document.getElementById('instructorName').value = '';
+        });
+
+        // Update the assigned instructors list
+        function updateAssignedInstructorsList() {
+            assignedInstructorsList.innerHTML = ''; // Clear existing list
+            courses.forEach(course => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${course.courseName} - Instructor: ${course.instructor}`;
+                assignedInstructorsList.appendChild(listItem);
+            });
+        }
+
+        // Edit and Delete Course Functions
+        function editCourse(button) {
+            const row = button.closest('tr');
+            const courseName = row.cells[0].textContent;
+            const category = row.cells[1].textContent;
+            const instructor = row.cells[2].textContent;
+            const description = row.cells[3].textContent;
+            const schedule = row.cells[4].textContent;
+            const prerequisites = row.cells[5].textContent;
+            const materials = row.cells[6].textContent;
+
+            // Populate form fields for editing
+            document.getElementById('courseName').value = courseName;
+            document.getElementById('category').value = category;
+            document.getElementById('instructor').value = instructor;
+            document.getElementById('description').value = description;
+            document.getElementById('schedule').value = schedule;
+            document.getElementById('prerequisites').value = prerequisites;
+
+            row.remove();
+        }
+
+        function deleteCourse(button) {
+            const row = button.closest('tr');
+            const courseName = row.cells[0].textContent;
+
+            // Remove course from courses array
+            courses = courses.filter(course => course.courseName !== courseName);
+
+            // Remove the course from dropdown
+            const option = [...courseOptions.options].find(option => option.value === courseName);
+            if (option) {
+                courseOptions.removeChild(option);
+            }
+
+            row.remove();
+        }
+    </script>
+</body>
+
+</html>

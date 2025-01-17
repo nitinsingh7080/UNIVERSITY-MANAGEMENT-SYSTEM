@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4facfe, #e900fe);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            margin: 0;
+        }
+        .courses-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .courses-container h2, .courses-container h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+        .courses-container button {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .courses-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .attendance-button {
+            background-color: #5cb85c;
+        }
+        .attendance-button:hover {
+            background-color: #4cae4c;
+        }
+        .profile-button {
+            background-color: #f0ad4e;
+        }
+        .profile-button:hover {
+            background-color: #ec971f;
+        }
+        .courses-container button:focus {
+            outline: none;
+        }
+        .courses-container h3 {
+            font-weight: 500;
+            color: #555;
+        }
+        @media (max-width: 600px) {
+            .courses-container {
+                width: 90%;
+                padding: 20px;
+            }
+            .courses-container button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="courses-container">
+        <h2>Select a Course</h2>
+        
+        <button class="profile-button" onclick="location.href='profile.html'">Your Profile</button>
+        <button onclick="location.href='java.html'">1. Java For Beginners</button>
+        <button onclick="location.href='dsa.html'">2. DSA Using JAVA</button>
+        <button onclick="location.href='dbms.html'">3. DBMS</button>
+        <button onclick="location.href='coa.html'">4. COA</button>
+        <button onclick="location.href='probability.html'">5. Probability and Statistics</button>
+        
+        <h3>Check Your Attendance</h3>
+        <button class="attendance-button" onclick="location.href='attendance.html'">Attendance</button>
+    </div>
+</body>
+</html>

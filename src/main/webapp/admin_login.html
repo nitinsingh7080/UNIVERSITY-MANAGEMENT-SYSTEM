@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Google Fonts for a professional look -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('galgotias.jpeg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;  /* Text color for better visibility on dark backgrounds */
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: scale(1.02);
+        }
+
+        .login-container h2 {
+            margin-bottom: 25px;
+            font-size: 2rem;
+            color: #333;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .login-container input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .login-container button:active {
+            transform: translateY(2px);
+        }
+
+        /* Error message styling */
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 25px 30px;
+            }
+
+            .login-container h2 {
+                font-size: 1.8rem;
+            }
+
+            .login-container input {
+                font-size: 0.95rem;
+                padding: 10px;
+            }
+
+            .login-container button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px 25px;
+            }
+
+            .login-container h2 {
+                font-size: 1.6rem;
+            }
+
+            .login-container input {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .login-container button {
+                font-size: 0.95rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="loginForm" action="admin_dashboard.html" method="get" onsubmit="return validateForm()">
+            <input type="text" name="name" id="name" placeholder="Name" required>
+            <input type="text" name="admin_id" id="admin_id" placeholder="Admin ID" required pattern="^[A-Za-z0-9]{5,15}$" title="Admin ID must be alphanumeric and between 5 to 15 characters">
+            <input type="password" name="password" id="password" placeholder="Password" required minlength="8" title="Password must be at least 8 characters long, containing a mix of letters, numbers, and symbols">
+            <button type="submit">Login</button>
+            <div id="error-message" class="error">Please fill out all fields correctly!</div>
+        </form>
+    </div>
+
+    <script>
+        // Client-side validation function
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const adminId = document.getElementById('admin_id').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Check if all fields are filled and match the validation rules
+            const idPattern = /^[A-Za-z0-9]{5,15}$/;
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!name || !adminId || !password) {
+                errorMessage.textContent = "All fields are required.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            if (!idPattern.test(adminId)) {
+                errorMessage.textContent = "Admin ID must be alphanumeric and between 5 to 15 characters.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                errorMessage.textContent = "Password must be at least 8 characters long and contain a mix of upper/lowercase letters, numbers, and symbols.";
+                errorMessage.style.display = "block";
+                return false;
+            }
+
+            // If everything is valid, hide the error message and proceed
+            errorMessage.style.display = "none";
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Management System</title>
+    
+    <!-- Linking to Bootstrap for quick styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-responsive {
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-bottom: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* 3D effect and color change on hover */
+        .btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(255, 0, 0, 0.1);
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(255, 193, 7, 0.3);
+            background: linear-gradient(45deg, #ffdd00, #ffbc00);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2), 0px 2px 10px rgba(220, 53, 69, 0.3);
+            background: linear-gradient(45deg, #dc3545, #ff6a3d);
+        }
+
+        .modal-content {
+            padding: 20px;
+        }
+
+        .modal-header {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .modal-body input {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Manage Students</h2>
+
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <input type="text" id="searchStudentsInput" class="form-control" placeholder="Search by name, email, or admission number" oninput="searchStudents()">
+    </div>
+
+    <!-- Button to open the modal to add new student -->
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add New Student</button>
+
+    <!-- Table to display the list of students -->
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Admission Number</th>
+                    <th>Date of Birth</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="studentsList">
+                <!-- Students will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <h2>Manage Faculty</h2>
+
+    <!-- Search Bar for Faculty -->
+    <div class="mb-3">
+        <input type="text" id="searchFacultyInput" class="form-control" placeholder="Search by name, email, or enrollment number" oninput="searchFaculty()">
+    </div>
+
+    <!-- Button to open the modal to add new faculty -->
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addFacultyModal">Add New Faculty</button>
+
+    <!-- Table to display the list of faculty -->
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Enrollment Number</th>
+                    <th>Date of Birth</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="facultyList">
+                <!-- Faculty will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal for adding or editing a student -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addStudentForm">
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="studentName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="studentEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admissionNumber" class="form-label">Admission Number</label>
+                        <input type="text" class="form-control" id="admissionNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentDOB" class="form-label">Date of Birth (dd/mm/yyyy)</label>
+                        <input type="text" class="form-control" id="studentDOB" placeholder="dd/mm/yyyy" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Student</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for adding or editing a faculty -->
+<div class="modal fade" id="addFacultyModal" tabindex="-1" aria-labelledby="addFacultyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addFacultyModalLabel">Add New Faculty</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addFacultyForm">
+                    <div class="mb-3">
+                        <label for="facultyName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="facultyName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="facultyEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="facultyEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="enrollmentNumber" class="form-label">Enrollment Number</label>
+                        <input type="text" class="form-control" id="enrollmentNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="facultyDOB" class="form-label">Date of Birth (dd/mm/yyyy)</label>
+                        <input type="text" class="form-control" id="facultyDOB" placeholder="dd/mm/yyyy" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save Faculty</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js for modal -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for managing students and faculty -->
+<script>
+    let studentsList = document.getElementById('studentsList');
+    let facultyList = document.getElementById('facultyList');
+    let studentsData = [];
+    let facultyData = [];
+    let currentEditStudentId = null;
+    let currentEditFacultyId = null;
+
+    // Function to handle adding a new student
+    document.getElementById('addStudentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get student details from form
+        let studentName = document.getElementById('studentName').value;
+        let studentEmail = document.getElementById('studentEmail').value;
+        let admissionNumber = document.getElementById('admissionNumber').value;
+        let studentDOB = document.getElementById('studentDOB').value;
+
+        if (currentEditStudentId === null) {
+            // Adding a new student
+            let newStudent = {
+                id: studentsData.length + 1,
+                name: studentName,
+                email: studentEmail,
+                admissionNumber: admissionNumber,
+                dob: studentDOB
+            };
+            studentsData.push(newStudent);
+        } else {
+            // Editing an existing student
+            let student = studentsData.find(s => s.id === currentEditStudentId);
+            student.name = studentName;
+            student.email = studentEmail;
+            student.admissionNumber = admissionNumber;
+            student.dob = studentDOB;
+            currentEditStudentId = null; // Reset edit mode
+        }
+
+        // Update the table with the new or updated student
+        renderStudents();
+
+        // Reset form and close modal
+        document.getElementById('addStudentForm').reset();
+        var addStudentModal = new bootstrap.Modal(document.getElementById('addStudentModal'));
+        addStudentModal.hide();
+    });
+
+    // Function to render students in the table
+    function renderStudents(filteredData = studentsData) {
+        // Clear existing list
+        studentsList.innerHTML = '';
+
+        // Loop through the students data array and add rows to the table
+        filteredData.forEach(function(student) {
+            let studentRow = document.createElement('tr');
+            studentRow.innerHTML = `
+                <td>${student.id}</td>
+                <td>${student.name}</td>
+                <td>${student.email}</td>
+                <td>${student.admissionNumber}</td>
+                <td>${student.dob}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editStudent(${student.id})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteStudent(${student.id})">Delete</button>
+                </td>
+            `;
+            studentsList.appendChild(studentRow);
+        });
+    }
+
+    // Function to edit a student's details
+    function editStudent(id) {
+        // Find the student by ID
+        let student = studentsData.find(s => s.id === id);
+
+        // Populate the form with current student data
+        document.getElementById('studentName').value = student.name;
+        document.getElementById('studentEmail').value = student.email;
+        document.getElementById('admissionNumber').value = student.admissionNumber;
+        document.getElementById('studentDOB').value = student.dob;
+
+        // Update the form to handle editing
+        document.getElementById('addStudentModalLabel').innerText = "Edit Student";
+        currentEditStudentId = id; // Set the ID of the student being edited
+
+        // Open the modal for editing
+        var addStudentModal = new bootstrap.Modal(document.getElementById('addStudentModal'));
+        addStudentModal.show();
+    }
+
+    // Function to delete a student
+    function deleteStudent(id) {
+        // Confirm before deleting
+        if (confirm("Are you sure you want to delete this student?")) {
+            // Remove the student from the data array
+            studentsData = studentsData.filter(s => s.id !== id);
+
+            // Re-render the students list
+            renderStudents();
+        }
+    }
+
+    // Function to search students by name, email, or admission number
+    function searchStudents() {
+        let query = document.getElementById('searchStudentsInput').value.toLowerCase();
+
+        let filteredData = studentsData.filter(student => {
+            return student.name.toLowerCase().includes(query) || 
+                   student.email.toLowerCase().includes(query) || 
+                   student.admissionNumber.toLowerCase().includes(query);
+        });
+
+        // Render filtered students
+        renderStudents(filteredData);
+    }
+
+    // Function to handle adding a new faculty
+    document.getElementById('addFacultyForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get faculty details from form
+        let facultyName = document.getElementById('facultyName').value;
+        let facultyEmail = document.getElementById('facultyEmail').value;
+        let enrollmentNumber = document.getElementById('enrollmentNumber').value;
+        let facultyDOB = document.getElementById('facultyDOB').value;
+
+        if (currentEditFacultyId === null) {
+            // Adding a new faculty
+            let newFaculty = {
+                id: facultyData.length + 1,
+                name: facultyName,
+                email: facultyEmail,
+                enrollmentNumber: enrollmentNumber,
+                dob: facultyDOB
+            };
+            facultyData.push(newFaculty);
+        } else {
+            // Editing an existing faculty
+            let faculty = facultyData.find(f => f.id === currentEditFacultyId);
+            faculty.name = facultyName;
+            faculty.email = facultyEmail;
+            faculty.enrollmentNumber = enrollmentNumber;
+            faculty.dob = facultyDOB;
+            currentEditFacultyId = null; // Reset edit mode
+        }
+
+        // Update the table with the new or updated faculty
+        renderFaculty();
+
+        // Reset form and close modal
+        document.getElementById('addFacultyForm').reset();
+        var addFacultyModal = new bootstrap.Modal(document.getElementById('addFacultyModal'));
+        addFacultyModal.hide();
+    });
+
+    // Function to render faculty in the table
+    function renderFaculty(filteredData = facultyData) {
+        // Clear existing list
+        facultyList.innerHTML = '';
+
+        // Loop through the faculty data array and add rows to the table
+        filteredData.forEach(function(faculty) {
+            let facultyRow = document.createElement('tr');
+            facultyRow.innerHTML = `
+                <td>${faculty.id}</td>
+                <td>${faculty.name}</td>
+                <td>${faculty.email}</td>
+                <td>${faculty.enrollmentNumber}</td>
+                <td>${faculty.dob}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editFaculty(${faculty.id})">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteFaculty(${faculty.id})">Delete</button>
+                </td>
+            `;
+            facultyList.appendChild(facultyRow);
+        });
+    }
+
+    // Function to edit a faculty's details
+    function editFaculty(id) {
+        // Find the faculty by ID
+        let faculty = facultyData.find(f => f.id === id);
+
+        // Populate the form with current faculty data
+        document.getElementById('facultyName').value = faculty.name;
+        document.getElementById('facultyEmail').value = faculty.email;
+        document.getElementById('enrollmentNumber').value = faculty.enrollmentNumber;
+        document.getElementById('facultyDOB').value = faculty.dob;
+
+        // Update the form to handle editing
+        document.getElementById('addFacultyModalLabel').innerText = "Edit Faculty";
+        currentEditFacultyId = id; // Set the ID of the faculty being edited
+
+        // Open the modal for editing
+        var addFacultyModal = new bootstrap.Modal(document.getElementById('addFacultyModal'));
+        addFacultyModal.show();
+    }
+
+    // Function to delete a faculty
+    function deleteFaculty(id) {
+        // Confirm before deleting
+        if (confirm("Are you sure you want to delete this faculty?")) {
+            // Remove the faculty from the data array
+            facultyData = facultyData.filter(f => f.id !== id);
+
+            // Re-render the faculty list
+            renderFaculty();
+        }
+    }
+
+    // Function to search faculty by name, email, or enrollment number
+    function searchFaculty() {
+        let query = document.getElementById('searchFacultyInput').value.toLowerCase();
+
+        let filteredData = facultyData.filter(faculty => {
+            return faculty.name.toLowerCase().includes(query) || 
+                   faculty.email.toLowerCase().includes(query) || 
+                   faculty.enrollmentNumber.toLowerCase().includes(query);
+        });
+
+        // Render filtered faculty
+        renderFaculty(filteredData);
+    }
+</script>
+
+</body>
+</html>

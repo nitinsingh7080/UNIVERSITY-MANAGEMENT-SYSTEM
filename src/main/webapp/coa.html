@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COA - Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #e900fe);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            margin: 0;
+        }
+        .details-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .details-container h2 {
+            margin-bottom: 20px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .details-container button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .details-container button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .details-container button:active {
+            transform: translateY(1px);
+        }
+        .video-container, .credit-container {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+            max-width: 560px;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            border-radius: 10px;
+        }
+        .video-container button {
+            margin-top: 15px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .video-container button:hover {
+            background-color: #e64a19;
+            transform: translateY(-2px);
+        }
+        .credit-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .credit-container p {
+            margin: 0;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .credit-container button {
+            margin-top: 15px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .credit-container button:hover {
+            background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+        .back-button {
+            margin-top: 30px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .back-button:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+        }
+    </style>
+    <script>
+        function showVideo() {
+            document.getElementById('video-container').style.display = 'block';
+        }
+
+        function hideVideo() {
+            document.getElementById('video-container').style.display = 'none';
+        }
+
+        function showCredit() {
+            document.getElementById('credit-container').style.display = 'block';
+        }
+
+        function hideCredit() {
+            document.getElementById('credit-container').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="details-container">
+        <h2>COA - Course Options</h2>
+        <button onclick="location.href='syllabus_coa.html'">1. Check Your Syllabus</button>
+        <button onclick="location.href='coateacher.html'">2. Check Your Teacher</button>
+        <button onclick="showCredit()">3. Course Credits</button>
+        <button onclick="showVideo()">4. Watch Attached Videos</button>
+        <button onclick="location.href='courses.html'" class="back-button">Back to Courses</button>
+    </div>
+    
+    <div id="video-container" class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/YRnjGeQbsHQ" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+        <button onclick="hideVideo()">Close Video</button>
+    </div>
+    
+    <div id="credit-container" class="credit-container">
+        <p><strong>Course Credit:</strong> This COA course carries 4 credits. It is designed to provide foundational programming knowledge and practical skills in Computer Organisation and Architecture (COA), preparing students for related projects and exams.</p>
+        <button onclick="hideCredit()">Close Credits</button>
+    </div>
+</body>
+</html>

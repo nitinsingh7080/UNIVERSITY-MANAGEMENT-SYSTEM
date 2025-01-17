@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #4facfe, #e900fe);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            margin: 0;
+        }
+        .details-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .details-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+        .details-container button {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .details-container button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .details-container button:focus {
+            outline: none;
+        }
+        .video-container,
+        .credit-container {
+            display: none; /* Initially hidden */
+            margin-top: 20px;
+            text-align: center;
+        }
+        .video-container iframe {
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+            border: none;
+            border-radius: 10px;
+        }
+        .video-container button {
+            margin-top: 10px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .video-container button:hover {
+            background-color: #e64a19;
+        }
+        .credit-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .credit-container p {
+            margin: 0;
+            color: #333;
+            font-size: 16px;
+        }
+        .credit-container button {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .credit-container button:hover {
+            background-color: #218838;
+        }
+        @media (max-width: 600px) {
+            .details-container {
+                width: 90%;
+                padding: 20px;
+            }
+            .details-container button {
+                font-size: 14px;
+            }
+            .credit-container p {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        function showVideo() {
+            document.getElementById('video-container').style.display = 'block';
+        }
+
+        function hideVideo() {
+            document.getElementById('video-container').style.display = 'none';
+        }
+
+        function showCredit() {
+            document.getElementById('credit-container').style.display = 'block';
+        }
+
+        function hideCredit() {
+            document.getElementById('credit-container').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="details-container">
+        <h2>DBMS - Options</h2>
+        <button onclick="location.href='syllabus_dbms.html'">1. Check Your Syllabus</button>
+        <button onclick="location.href='dbmsteacher.html'">2. Check Your Teacher</button>
+        <button onclick="showCredit()">3. Credit of the Course</button>
+        <button onclick="showVideo()">4. Attached Videos</button>
+        <button onclick="location.href='courses.html'" style="margin-top: 20px;">Back to Courses</button>
+    </div>
+
+    <div id="video-container" class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/DsK35f8wyUw" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+        <button onclick="hideVideo()">Close Video</button>
+    </div>
+
+    <div id="credit-container" class="credit-container">
+        <p><strong>Course Credit:</strong> This DBMS course carries 4 credits. It is designed to provide foundational programming knowledge and practical skills in DBMS, preparing students for related projects.</p>
+        <button onclick="hideCredit()">Close Credit</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java For Beginners</title>
+    <style>
+        /* Global body styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #4facfe, #e900fe);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Header section */
+        header {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        /* Details Container */
+        .details-container {
+            text-align: center;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.8rem;
+        }
+
+        .details-container button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .details-container button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .details-container button:active {
+            background-color: #004080;
+            transform: translateY(0);
+        }
+
+        /* Video Section */
+        .video-container,
+        .credit-container {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            max-width: 560px;
+            height: 315px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .video-container button,
+        .credit-container button {
+            margin-top: 10px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .video-container button:hover,
+        .credit-container button:hover {
+            background-color: #e64a19;
+        }
+
+        /* Credit Section */
+        .credit-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .credit-container p {
+            margin: 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design for smaller devices */
+        @media (max-width: 768px) {
+            .details-container {
+                max-width: 90%;
+            }
+
+            .details-container button {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+
+            .video-container iframe {
+                max-width: 100%;
+            }
+
+            .video-container button,
+            .credit-container button {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+    <script>
+        function showVideo() {
+            document.getElementById('video-container').style.display = 'block';
+        }
+
+        function hideVideo() {
+            document.getElementById('video-container').style.display = 'none';
+        }
+
+        function showCredit() {
+            document.getElementById('credit-container').style.display = 'block';
+        }
+
+        function hideCredit() {
+            document.getElementById('credit-container').style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        Java For Beginners - Course Overview
+    </header>
+
+    <!-- Main Content -->
+    <div class="details-container">
+        <h2>Java For Beginners - Options</h2>
+        <button onclick="location.href='syllabus_java.html'">1. Check Your Syllabus</button>
+        <button onclick="location.href='javateacher.html'">2. Check Your Teacher</button>
+        <button onclick="showCredit()">3. Course Credits</button>
+        <button onclick="showVideo()">4. Watch Attached Videos</button>
+        <button onclick="location.href='courses.html'" style="margin-top: 20px;">Back to Courses</button>
+    </div>
+
+    <!-- Video Section -->
+    <div id="video-container" class="video-container">
+        <iframe src="https://www.youtube.com/embed/vgRb9SyohSo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <button onclick="hideVideo()">Close Video</button>
+    </div>
+
+    <!-- Credit Section -->
+    <div id="credit-container" class="credit-container">
+        <p><strong>Course Credit:</strong> This Java course carries 5 credits. It is designed to provide foundational programming knowledge and practical skills in Java, preparing students for advanced software development projects.</p>
+        <button onclick="hideCredit()">Close Credit</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Java Learning Academy. All Rights Reserved. <br><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .financial-dashboard {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            width: 200px;
+            margin: 10px;
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .card:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        .management-tool,
+        .recent-transactions {
+            margin-bottom: 40px;
+        }
+
+        .management-tool h3,
+        .recent-transactions h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .management-tool button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .management-tool button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Financial Management Dashboard</h2>
+
+    <div class="financial-dashboard">
+        <div class="card" onclick="window.location.href='#'">
+            <h3>Total Revenue</h3>
+            <p>₹12,450,000</p> <!-- Converted $150,000 to ₹12,450,000 -->
+        </div>
+        <div class="card" onclick="window.location.href='#'">
+            <h3>Total Expenses</h3>
+            <p>₹6,225,000</p> <!-- Converted $75,000 to ₹6,225,000 -->
+        </div>
+        <div class="card" onclick="window.location.href='#'">
+            <h3>Net Profit</h3>
+            <p>₹6,225,000</p> <!-- Converted $75,000 to ₹6,225,000 -->
+        </div>
+        <div class="card" onclick="window.location.href='#'">
+            <h3>Upcoming Payments</h3>
+            <p>₹415,000 due in 7 days</p> <!-- Converted $5,000 to ₹415,000 -->
+        </div>
+    </div>
+
+    <div class="management-tools">
+        <div class="management-tool">
+            <h3>Budget Management</h3>
+            <p>Set and monitor your budget allocations for different departments.</p>
+            <button onclick="window.location.href='budget_management.html'">Manage Budgets</button>
+        </div>
+        <div class="management-tool">
+            <h3>Expense Tracking</h3>
+            <p>Track expenses in real-time and categorize them for better visibility.</p>
+            <button onclick="window.location.href='expense_tracking.html'">Track Expenses</button>
+        </div>
+        <div class="management-tool">
+            <h3>Financial Reports</h3>
+            <p>Generate detailed reports for better financial insight.</p>
+            <button onclick="window.location.href='generate_reports.html'">Generate Reports</button>
+        </div>
+    </div>
+
+    <div class="recent-transactions">
+        <h3>Recent Financial Transactions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025-01-01</td>
+                    <td>Office Supplies</td>
+                    <td>- ₹16,600</td> <!-- Converted $200 to ₹16,600 -->
+                    <td>Paid</td>
+                </tr>
+                <tr>
+                    <td>2025-01-02</td>
+                    <td>Client Payment</td>
+                    <td>+ ₹415,000</td> <!-- Converted $5,000 to ₹415,000 -->
+                    <td>Received</td>
+                </tr>
+                <!-- More rows can go here -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>For further assistance, contact <a href="mailto:support@example.com">support@example.com</a></p>
+    </div>
+
+</body>
+
+</html>

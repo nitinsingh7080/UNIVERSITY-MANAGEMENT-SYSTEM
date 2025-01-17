@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .container {
+            width: 85%;
+            margin: 40px auto;
+        }
+
+        .expense-form,
+        .expense-summary {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .expense-form h3,
+        .expense-summary h3 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .expense-form input,
+        .expense-form select,
+        .expense-form button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .expense-form button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .expense-form button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .expense-summary .total-expense {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #ff5722;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #2d2d2d;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .footer a {
+            color: #ff5722;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Expense Tracking Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <!-- Add Expense Form -->
+        <div class="expense-form">
+            <h3>Add New Expense</h3>
+            <form id="expenseForm">
+                <input type="text" id="expenseName" placeholder="Expense Name" required />
+                <input type="number" id="expenseAmount" placeholder="Amount (INR)" required />
+                <select id="expenseCategory" required>
+                    <option value="">Select Category</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
+                    <option value="HR">Human Resources</option>
+                    <option value="Operations">Operations</option>
+                    <option value="IT">IT</option>
+                </select>
+                <input type="date" id="expenseDate" required />
+                <button type="submit">Add Expense</button>
+            </form>
+        </div>
+
+        <!-- Expense Summary -->
+        <div class="expense-summary">
+            <h3>Expense Summary</h3>
+            <p class="total-expense">Total Expenses: ₹0</p>
+            <table id="expenseTable">
+                <thead>
+                    <tr>
+                        <th>Expense Name</th>
+                        <th>Category</th>
+                        <th>Amount (INR)</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Expense rows will appear here dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Your Company Name | <a href="mailto:support@yourcompany.com">Contact Support</a></p>
+    </div>
+
+    <script>
+        // JavaScript to handle expense tracking functionality
+        const expenseForm = document.getElementById('expenseForm');
+        const expenseTable = document.getElementById('expenseTable').getElementsByTagName('tbody')[0];
+        const totalExpenseDisplay = document.querySelector('.total-expense');
+        let totalExpense = 0;
+
+        // Add new expense
+        expenseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const expenseName = document.getElementById('expenseName').value;
+            const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
+            const expenseCategory = document.getElementById('expenseCategory').value;
+            const expenseDate = document.getElementById('expenseDate').value;
+
+            if (expenseName && expenseAmount && expenseCategory && expenseDate) {
+                // Add new row to the table
+                const newRow = expenseTable.insertRow();
+                newRow.innerHTML = `
+                    <td>${expenseName}</td>
+                    <td>${expenseCategory}</td>
+                    <td>₹${expenseAmount}</td>
+                    <td>${expenseDate}</td>
+                    <td><button onclick="deleteExpense(this)">Delete</button></td>
+                `;
+
+                // Update the total expense
+                totalExpense += expenseAmount;
+                totalExpenseDisplay.textContent = `Total Expenses: ₹${totalExpense.toFixed(2)}`;
+
+                // Clear the form
+                expenseForm.reset();
+            }
+        });
+
+        // Delete an expense from the table
+        function deleteExpense(button) {
+            const row = button.closest('tr');
+            const amount = parseFloat(row.cells[2].textContent.replace('₹', ''));
+            row.remove();
+
+            // Update the total expense
+            totalExpense -= amount;
+            totalExpenseDisplay.textContent = `Total Expenses: ₹${totalExpense.toFixed(2)}`;
+        }
+    </script>
+</body>
+
+</html>

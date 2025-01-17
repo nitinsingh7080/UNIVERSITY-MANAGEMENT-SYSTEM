@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile - DBMS</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #a9c7e7, #5c77d3); /* Subtle gradient for a professional look */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .profile-container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-container h2 {
+            margin: 10px 0;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .profile-container p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .profile-container h4 {
+            color: #2b3a42;
+            margin-top: 10px;
+        }
+
+        .save-button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .save-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Responsive design for mobile screens */
+        @media (max-width: 600px) {
+            .profile-container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .profile-container img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .save-button, .back-button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <img src="DBMS Teacher.png" alt="Teacher's Profile Image">
+        <h2>Mr. Arvind Yadav</h2>
+        <p>Qualification: <h4>M.Sc. in Database Management System</h4></p>
+        <p>Course Name: <h4>Database Management System (DBMS)</h4></p>
+        <button class="save-button" onclick="saveProfile()">Save Profile</button>
+        <button class="back-button" onclick="location.href='dsa.html'">Back to Courses</button>
+    </div>
+
+    <script>
+        function saveProfile() {
+            const qualification = document.querySelector('h4').textContent;
+            const courseName = document.querySelectorAll('h4')[1].textContent;
+
+            // In a real application, you can send this data to the server for saving
+            alert(`Profile saved:\nQualification: ${qualification}\nCourse Name: ${courseName}`);
+        }
+    </script>
+</body>
+</html>

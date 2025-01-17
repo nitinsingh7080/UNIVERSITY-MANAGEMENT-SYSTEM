@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .budget-overview,
+        .budget-allocation-form {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .overview-card {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            width: 23%;
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .overview-card:hover {
+            background-color: #0056b3;
+            transform: translateY(-5px);
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container input,
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h2>Budget Management</h2>
+
+    <!-- Budget Overview Section -->
+    <div class="budget-overview">
+        <div class="overview-card">
+            <h4>Total Budget</h4>
+            <p>₹4150000</p> <!-- 500,000 USD = 4,150,000 INR -->
+        </div>
+        <div class="overview-card">
+            <h4>Allocated Budget</h4>
+            <p>₹2490000</p> <!-- 300,000 USD = 2,490,000 INR -->
+        </div>
+        <div class="overview-card">
+            <h4>Remaining Budget</h4>
+            <p>₹1665000</p> <!-- 200,000 USD = 1,665,000 INR -->
+        </div>
+    </div>
+
+    <!-- Form to Add Budget Allocation -->
+    <div class="form-container">
+        <h3>Add New Budget Allocation</h3>
+        <form>
+            <label for="department">Department</label>
+            <select id="department" required>
+                <option value="">Select Department</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Sales">Sales</option>
+                <option value="HR">Human Resources</option>
+                <option value="Operations">Operations</option>
+            </select>
+
+            <label for="amount">Amount (in INR)</label>
+            <input type="number" id="amount" placeholder="Enter Amount" required>
+
+            <label for="allocationDate">Date of Allocation</label>
+            <input type="date" id="allocationDate" required>
+
+            <button type="submit">Allocate Budget</button>
+        </form>
+    </div>
+
+    <!-- Budget Allocations Table -->
+    <div class="allocation-table">
+        <h3>Current Budget Allocations</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Allocated Amount (INR)</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Marketing</td>
+                    <td>₹4150000</td> <!-- 50,000 USD = 4,150,000 INR -->
+                    <td>2025-01-01</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>HR</td>
+                    <td>₹2490000</td> <!-- 30,000 USD = 2,490,000 INR -->
+                    <td>2025-01-02</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>Sales</td>
+                    <td>₹8300000</td> <!-- 100,000 USD = 8,300,000 INR -->
+                    <td>2025-01-03</td>
+                    <td><button>Edit</button> <button>Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Graphical Representation Section (Placeholder for Chart) -->
+    <div class="chart-container">
+        <h3>Budget Allocation Visualization</h3>
+        <div id="chart">
+            <!-- Example of a chart -->
+            <p>Chart Placeholder (Can be integrated with JavaScript charting libraries like Chart.js or Google Charts)</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>For further assistance, contact <a href="mailto:ns602146@gmail.com">sns602146@gmail.com</a></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Placeholder chart example using Chart.js
+        var ctx = document.getElementById('chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Marketing', 'Sales', 'HR', 'Operations'],
+                datasets: [{
+                    label: 'Budget Allocation',
+                    data: [4150000, 8300000, 2490000, 9960000], // Data in INR
+                    backgroundColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
+                    borderColor: ['#FF5733', '#33FF57', '#3357FF', '#FF33A8'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ₹' + tooltipItem.raw;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
