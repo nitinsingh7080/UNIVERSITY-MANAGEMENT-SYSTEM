@@ -37,14 +37,6 @@
             font-weight: 600;
         }
 
-        h3 {
-            font-size: 1.5rem;
-            color: #007bff;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-
         .form-section {
             display: flex;
             flex-wrap: wrap;
@@ -97,33 +89,6 @@
             background-color: #218838;
         }
 
-        .report-section {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .report-section button {
-            background-color: #0062cc;
-        }
-
-        .report-section button:hover {
-            background-color: #004085;
-        }
-
-        #report-output {
-            margin-top: 20px;
-            background-color: #e3f2fd;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-            white-space: pre-line;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1rem;
-            color: #333;
-        }
-
         .alert {
             color: red;
             font-weight: bold;
@@ -145,268 +110,71 @@
         <!-- Student Enrollment Section -->
         <div class="form-section">
             <div class="form-group">
-                <h3>Enroll/Remove Students</h3>
-                <form id="enroll-form">
-                    <label for="student-name">Student Name:</label>
-                    <input type="text" id="student-name" placeholder="Enter student name" required>
+                <h3>Enroll Student</h3>
+                <form id="enrollForm" action="EnrollmentServlet" method="post">
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" name="studentName" placeholder="Enter student name" required>
 
-                    <label for="course-name">Course:</label>
-                    <select id="course-name">
+                    <label for="courseName">Course:</label>
+                    <select id="courseName" name="courseName">
                         <option value="Course A">Course A</option>
                         <option value="Course B">Course B</option>
                         <option value="Course C">Course C</option>
                     </select>
 
-                    <button type="button" onclick="enrollStudent()">Enroll Student</button>
-                    <button type="button" onclick="removeStudent()">Remove Student</button>
-                    <div id="student-alert" class="alert"></div>
+                    <button type="submit">Enroll Student</button>
                 </form>
-            </div>
-
-            <!-- Course Capacity Section -->
-            <div class="form-group">
-                <h3>Set Course Capacity</h3>
-                <label for="course-capacity">Select Course:</label>
-                <select id="course-capacity">
-                    <option value="Course A">Course A</option>
-                    <option value="Course B">Course B</option>
-                    <option value="Course C">Course C</option>
-                </select>
-
-                <label for="max-capacity">Max Students:</label>
-                <input type="number" id="max-capacity" min="1" required>
-
-                <button type="button" onclick="setCapacity()">Set Capacity</button>
-            </div>
-        </div>
-
-        <!-- Enrollment Reports Section -->
-        <div class="report-section">
-            <h3>Reports</h3>
-            <button onclick="generateReport()">Generate Enrollment Report</button>
-            <button onclick="generateAttendanceReport()">Generate Attendance Report</button>
-            <button onclick="generateGradeReport()">Generate Grade Report</button>
-            <div id="report-output"></div>
-        </div>
-
-        <!-- Grade Entry Section -->
-        <div class="form-section">
-            <div class="form-group">
-                <h3>Grade Entry</h3>
-                <label for="student-name">Student Name:</label>
-                <input type="text" id="student-grade-name" placeholder="Enter student name for grading" required>
-
-                <label for="course-grade-name">Course:</label>
-                <select id="course-grade-name">
-                    <option value="Course A">Course A</option>
-                    <option value="Course B">Course B</option>
-                    <option value="Course C">Course C</option>
-                </select>
-
-                <label for="assignment-grade">Assignment Grade:</label>
-                <input type="number" id="assignment-grade" min="0" max="100" placeholder="Enter assignment grade" required>
-
-                <label for="midterm-grade">Midterm Grade:</label>
-                <input type="number" id="midterm-grade" min="0" max="100" placeholder="Enter midterm grade" required>
-
-                <label for="final-grade">Final Grade:</label>
-                <input type="number" id="final-grade" min="0" max="100" placeholder="Enter final exam grade" required>
-
-                <button type="button" onclick="enterGrades()">Enter Grades</button>
-                <div id="grade-alert" class="alert"></div>
             </div>
         </div>
 
         <!-- Attendance Section -->
         <div class="form-section">
             <div class="form-group">
-                <h3>Attendance Tracking</h3>
-                <label for="attendance-student-name">Student Name:</label>
-                <input type="text" id="attendance-student-name" placeholder="Enter student name for attendance" required>
+                <h3>Mark Attendance</h3>
+                <form id="attendanceForm" action="AttendanceServlet" method="post">
+                    <label for="attendanceStudentName">Student Name:</label>
+                    <input type="text" id="attendanceStudentName" name="attendanceStudentName" placeholder="Enter student name" required>
 
-                <label for="attendance-course-name">Course:</label>
-                <select id="attendance-course-name">
-                    <option value="Course A">Course A</option>
-                    <option value="Course B">Course B</option>
-                    <option value="Course C">Course C</option>
-                </select>
+                    <label for="attendanceCourseName">Course:</label>
+                    <select id="attendanceCourseName" name="attendanceCourseName">
+                        <option value="Course A">Course A</option>
+                        <option value="Course B">Course B</option>
+                        <option value="Course C">Course C</option>
+                    </select>
 
-                <button type="button" onclick="markAttendance()">Mark Attendance</button>
-                <div id="attendance-alert" class="alert"></div>
+                    <button type="submit">Mark Attendance</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Grade Entry Section -->
+        <div class="form-section">
+            <div class="form-group">
+                <h3>Grade Entry</h3>
+                <form id="gradeForm" action="GradeServlet" method="post">
+                    <label for="gradeStudentName">Student Name:</label>
+                    <input type="text" id="gradeStudentName" name="gradeStudentName" placeholder="Enter student name" required>
+
+                    <label for="gradeCourseName">Course:</label>
+                    <select id="gradeCourseName" name="gradeCourseName">
+                        <option value="Course A">Course A</option>
+                        <option value="Course B">Course B</option>
+                        <option value="Course C">Course C</option>
+                    </select>
+
+                    <label for="assignmentGrade">Assignment Grade:</label>
+                    <input type="number" id="assignmentGrade" name="assignmentGrade" min="0" max="100" required>
+
+                    <label for="midtermGrade">Midterm Grade:</label>
+                    <input type="number" id="midtermGrade" name="midtermGrade" min="0" max="100" required>
+
+                    <label for="finalGrade">Final Grade:</label>
+                    <input type="number" id="finalGrade" name="finalGrade" min="0" max="100" required>
+
+                    <button type="submit">Submit Grades</button>
+                </form>
             </div>
         </div>
     </div>
-
-    <script>
-        // JavaScript logic to handle enrollment, course capacity, and report generation
-        let studentsEnrolled = {
-            "Course A": [],
-            "Course B": [],
-            "Course C": []
-        };
-
-        let courseCapacities = {
-            "Course A": 30,
-            "Course B": 25,
-            "Course C": 20
-        };
-
-        let studentDatabase = [];
-
-        let studentGrades = {};
-        let attendanceRecord = {};  // Track attendance for each student and course
-
-        // Enroll a student in a course
-        function enrollStudent() {
-            const studentName = document.getElementById('student-name').value.trim();
-            const courseName = document.getElementById('course-name').value;
-
-            if (studentName === "") {
-                document.getElementById('student-alert').innerText = "Please enter a valid student name.";
-                return;
-            }
-
-            if (studentsEnrolled[courseName].length < courseCapacities[courseName]) {
-                studentsEnrolled[courseName].push(studentName);
-                studentDatabase.push({ name: studentName, course: courseName });
-                document.getElementById('student-alert').innerText = `${studentName} has been successfully enrolled in ${courseName}.`;
-                document.getElementById('student-alert').style.color = "green";
-            } else {
-                document.getElementById('student-alert').innerText = "Course is full. Cannot enroll the student.";
-                document.getElementById('student-alert').style.color = "red";
-            }
-        }
-
-        // Remove a student from a course
-        function removeStudent() {
-            const studentName = document.getElementById('student-name').value.trim();
-            const courseName = document.getElementById('course-name').value;
-
-            if (studentName === "") {
-                document.getElementById('student-alert').innerText = "Please enter a valid student name.";
-                return;
-            }
-
-            const courseIndex = studentsEnrolled[courseName].indexOf(studentName);
-            if (courseIndex !== -1) {
-                studentsEnrolled[courseName].splice(courseIndex, 1);
-                document.getElementById('student-alert').innerText = `${studentName} has been removed from ${courseName}.`;
-                document.getElementById('student-alert').style.color = "orange";
-            } else {
-                document.getElementById('student-alert').innerText = `${studentName} is not enrolled in ${courseName}.`;
-                document.getElementById('student-alert').style.color = "red";
-            }
-        }
-
-        // Set course capacity
-        function setCapacity() {
-            const courseName = document.getElementById('course-capacity').value;
-            const maxCapacity = parseInt(document.getElementById('max-capacity').value);
-
-            if (isNaN(maxCapacity) || maxCapacity <= 0) {
-                alert("Please enter a valid capacity.");
-                return;
-            }
-
-            courseCapacities[courseName] = maxCapacity;
-            alert(`The maximum capacity for ${courseName} has been set to ${maxCapacity} students.`);
-        }
-
-        // Generate enrollment report
-        function generateReport() {
-            let reportContent = "Enrollment Report\n\n";
-
-            Object.keys(studentsEnrolled).forEach(course => {
-                reportContent += `${course}:\n`;
-                if (studentsEnrolled[course].length > 0) {
-                    studentsEnrolled[course].forEach(student => {
-                        reportContent += `  - ${student}\n`;
-                    });
-                } else {
-                    reportContent += "  No students enrolled.\n";
-                }
-                reportContent += "\n";
-            });
-
-            document.getElementById('report-output').innerText = reportContent;
-        }
-
-        // Generate attendance report
-        function generateAttendanceReport() {
-            let reportContent = "Attendance Report\n\n";
-            Object.keys(attendanceRecord).forEach(course => {
-                reportContent += `${course}:\n`;
-                if (attendanceRecord[course].length > 0) {
-                    attendanceRecord[course].forEach(student => {
-                        reportContent += `  - ${student} attended\n`;
-                    });
-                } else {
-                    reportContent += "  No attendance marked.\n";
-                }
-                reportContent += "\n";
-            });
-            document.getElementById('report-output').innerText = reportContent;
-        }
-
-        // Generate grade report
-        function generateGradeReport() {
-            let reportContent = "Grade Report\n\n";
-            Object.keys(studentGrades).forEach(student => {
-                reportContent += `${student}:\n`;
-                Object.keys(studentGrades[student]).forEach(course => {
-                    const grades = studentGrades[student][course];
-                    reportContent += `  - ${course}: Assignment: ${grades.assignmentGrade}, Midterm: ${grades.midtermGrade}, Final: ${grades.finalGrade}\n`;
-                });
-                reportContent += "\n";
-            });
-            document.getElementById('report-output').innerText = reportContent;
-        }
-
-        // Enter grades for a student
-        function enterGrades() {
-            const studentName = document.getElementById('student-grade-name').value.trim();
-            const courseName = document.getElementById('course-grade-name').value;
-            const assignmentGrade = parseFloat(document.getElementById('assignment-grade').value);
-            const midtermGrade = parseFloat(document.getElementById('midterm-grade').value);
-            const finalGrade = parseFloat(document.getElementById('final-grade').value);
-
-            if (!studentName || isNaN(assignmentGrade) || isNaN(midtermGrade) || isNaN(finalGrade)) {
-                document.getElementById('grade-alert').innerText = "Please fill out all fields with valid values.";
-                return;
-            }
-
-            if (!studentGrades[studentName]) {
-                studentGrades[studentName] = {};
-            }
-
-            studentGrades[studentName][courseName] = {
-                assignmentGrade,
-                midtermGrade,
-                finalGrade
-            };
-
-            document.getElementById('grade-alert').innerText = `${studentName}'s grades have been recorded for ${courseName}.`;
-            document.getElementById('grade-alert').style.color = "green";
-        }
-
-        // Mark attendance for a student
-        function markAttendance() {
-            const studentName = document.getElementById('attendance-student-name').value.trim();
-            const courseName = document.getElementById('attendance-course-name').value;
-
-            if (studentName === "") {
-                document.getElementById('attendance-alert').innerText = "Please enter a valid student name.";
-                return;
-            }
-
-            if (!attendanceRecord[courseName]) {
-                attendanceRecord[courseName] = [];
-            }
-
-            attendanceRecord[courseName].push(studentName);
-            document.getElementById('attendance-alert').innerText = `${studentName}'s attendance has been marked for ${courseName}.`;
-            document.getElementById('attendance-alert').style.color = "green";
-        }
-    </script>
 </body>
 </html>
