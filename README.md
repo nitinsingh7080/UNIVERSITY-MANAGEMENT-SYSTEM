@@ -70,29 +70,3 @@ User Request: A user sends a request (e.g., viewing grades).
 Servlet Processing: The servlet receives the request, processes it, and interacts with the database.
 Database Query: SQL queries fetch or update data.
 Response Generation: JSP renders the dynamic page and sends it back to the user.
-Database Design
-Tables
-Users:
-
-id: Primary key.
-name, email, password, role.
-Courses:
-
-course_id: Primary key.
-name, credits, faculty_id.
-Students:
-
-student_id: Primary key.
-name, email, course_id.
-Attendance:
-
-attendance_id: Primary key.
-student_id, course_id, date, status.
-Grades:
-
-grade_id: Primary key.
-student_id, course_id, grade.
-Timetable:
-
-schedule_id: Primary key.
-course_id, date, time.
