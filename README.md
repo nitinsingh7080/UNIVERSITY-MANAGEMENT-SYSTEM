@@ -1,5 +1,5 @@
 Repository Link --> https://github.com/nitinsingh7080/UNIVERSITY-MANAGEMENT-SYSTEM
-[documentation proj.docx](https://github.com/user-attachments/files/18472722/documentation.proj.docx)
+Documentation of University management Project --> [documentation proj.docx](https://github.com/user-attachments/files/18472722/documentation.proj.docx)
 University Management System: Full Description--:
 
 The University Management System (UMS) is a web-based application designed to manage various operations of a university. It provides tools for administrators, faculty, and students to manage academic and administrative activities efficiently. The system leverages Java, Servlets, JSP, JavaScript, CSS, and SQL to create a robust, interactive, and scalable platform.
